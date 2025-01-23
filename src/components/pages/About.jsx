@@ -6,7 +6,7 @@ import {
 
 import { Link } from "react-router-dom";
 
-import { experiences, skills, socialLinks } from "../constants";
+import { experiences, nontechskills, resumepage, skills, socialLinks } from "../constants";
 
 import "react-vertical-timeline-component/style.min.css";
 import CTA from "../CTA";
@@ -33,6 +33,23 @@ const About = () => {
         <h3 className="subhead-text">My skills</h3>
         <div className="mt-16 flex flex-wrap gap-12">
           {skills.map((skill) => (
+            <div className="block-container w-20 h-20" key={skill.name}>
+              <div className="btn-back rounded-xl" />
+              <div className="btn-front rounded-xl flex justify-center items-center">
+                <img
+                  src={skill.imageUrl}
+                  alt={skill.name}
+                  className="w-1/2 h-1/2 object-contain"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className=" py-10 flex flex-col">
+        <h3 className="subhead-text">Proficiency On Tools and Technologies</h3>
+        <div className="mt-16 flex flex-wrap gap-12">
+          {nontechskills.map((skill) => (
             <div className="block-container w-20 h-20" key={skill.name}>
               <div className="btn-back rounded-xl" />
               <div className="btn-front rounded-xl flex justify-center items-center">
@@ -124,7 +141,28 @@ const About = () => {
              
                   <Link
                   to={link.link}
-                  target="_blank"
+                  target={link.name === "Contact" ? "_self" :"_blank"}
+                  rel="noopener noreferrer"
+                  className="font-semibold text-blue-600"
+                >
+                   <img
+                  src={link.iconUrl}
+                  alt={link.name}
+                  className=" object-contain"
+                />
+
+                </Link>
+              </div>
+            </div>
+          ))}
+          {resumepage.map((link) => (
+            <div className="block-container w-20 h-20" key={link.name}>
+              <div className="btn-back rounded-xl" />
+              <div className="btn-front rounded-xl flex justify-center items-center">
+             
+                  <Link
+                  to={link.link}
+                  target={link.name === "Contact" ? "_self" :"_blank"}
                   rel="noopener noreferrer"
                   className="font-semibold text-blue-600"
                 >

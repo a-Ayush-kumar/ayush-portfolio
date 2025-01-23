@@ -12,6 +12,7 @@ const InfoBox = ({text, link, btnText}) =>(
         <img src={arrow} className="w-4 h-4 object-contain" alt='dive in!' />
         </Link>
     </div>
+    
 )
 
 
@@ -23,13 +24,15 @@ const renderContent = {
         👋
         <br />
         An Indian engineering student, constructing digital bridges through code and pixels.
+        <br/>
+        Experience the captivating motion of a ball as it moves smoothly from left to right, demonstrating skill.
       </h1>
     ),
     2:(
         <InfoBox
         text="Web developer with mechanical prowess, engaged in technology."
         link= "/about"
-        btnText="Learn more"/>
+        btnText="Know more"/>
     ),
     3:(
         <InfoBox

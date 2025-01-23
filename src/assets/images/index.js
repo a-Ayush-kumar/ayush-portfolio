@@ -1,9 +1,10 @@
-import hero from './hero.jpg'
+
 import uas from './uas.png'
 import logo from './logo.svg'
+import zipfile from './zipfile.zip'
 
 export {
-    hero,
     uas,
-    logo
+    logo,
+    zipfile
 }
