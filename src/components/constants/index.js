@@ -266,6 +266,16 @@ export const projects = [
     link: "https://nextjs-invoice-ayush.vercel.app/",
     github: "https://github.com/a-Ayush-kumar/nextjs-invoice",
   },
+  {
+    iconUrl: resume,
+    theme: "btn-back-black",
+    name: "Legal drafting solution",
+    description:
+      "Developed a legal drafting solution using Next.js framework, enhancing the efficiency and accuracy of legal document creation, and significantly improving user experience and workflow for legal professionals.",
+    link: "https://draft-ten-ruby.vercel.app/",
+    github: "https://github.com/a-Ayush-kumar/draft",
+
+  }
 ];
 export const mechanicalprojects = [
   {
@@ -291,6 +301,6 @@ export const resumepage = [
     theme: "btn-back-black",
     name: "Resume",
     description: ".",
-    link: "https://drive.google.com/file/d/1OpVju344ShPJdZQd7BZ1h2ogJ46eb4eR/view?usp=sharing",
+    link: "https://drive.google.com/file/d/15vJNYjrpsRBjkHPTfQAoLm0GpFA1jsQ6/view?usp=sharing",
   },
 ];
