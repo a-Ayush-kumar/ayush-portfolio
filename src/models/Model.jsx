@@ -7,7 +7,7 @@ Title: Spherical No.1 🪩
 */
 
 import { a } from "@react-spring/three"; //this enables the animations
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useCallback } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 
@@ -27,7 +27,7 @@ export function Model({
   const rotationSpeed = useRef(0);
   const dampingFactor = 0.95;
 
-  const handlePointerDown = (event) => {
+  const handlePointerDown = useCallback((event) => {
     event.stopPropagation();
     event.preventDefault();
     setIsRotating(true);
@@ -35,9 +35,9 @@ export function Model({
     const clientX = event.touches ? event.touches[0].clientX : event.clientX;
 
     lastX.current = clientX;
-  };
+  },[setIsRotating]);
 
-  const handlePointerUp = (event) => {
+  const handlePointerUp = useCallback((event) => {
     event.stopPropagation();
     event.preventDefault();
     setIsRotating(false);
@@ -49,9 +49,9 @@ export function Model({
     // ModelRef.current.rotation.y += delta * 0.01 * Math.PI;
     // lastX.current = clientX;
     // rotationSpeed.current = delta * 0.01 * Math.PI;
-  };
+  },[setIsRotating]);
 
-  const handlePointerMove = (event) => {
+  const handlePointerMove = useCallback((event) => {
     event.stopPropagation();
     event.preventDefault();
 
@@ -64,9 +64,9 @@ export function Model({
       lastX.current = clientX;
       rotationSpeed.current = delta * 0.01 * Math.PI;
     }
-  };
+  },[isRotating,viewport.width]);
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = useCallback((event) => {
     if (event.key === "ArrowLeft") {
       if (!isRotating) setIsRotating(true);
       ModelRef.current.rotation.y += 0.01 * Math.PI;
@@ -75,44 +75,43 @@ export function Model({
       ModelRef.current.rotation.y -= 0.01 * Math.PI;
       rotationSpeed.current = -0.007;
     }
-  };
+  },[isRotating,setIsRotating]);
 
-  const handleKeyUp = (event) => {
+  const handleKeyUp = useCallback((event) => {
     if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
       setIsRotating(false);
     }
-  };
+  },[setIsRotating]);
 
-  const handleTouchStart = (e) => {
+  const handleTouchStart = useCallback((e) => {
     e.stopPropagation();
     e.preventDefault();
     setIsRotating(true);
-  
+
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     lastX.current = clientX;
-  }
-  
-  const handleTouchEnd = (e) => {
+  },[setIsRotating]);
+
+  const handleTouchEnd = useCallback((e) => {
     e.stopPropagation();
     e.preventDefault();
     setIsRotating(false);
-  }
-  
-  const handleTouchMove = (e) => {
+  },[setIsRotating]);
+
+  const handleTouchMove = useCallback((e) => {
     e.stopPropagation();
     e.preventDefault();
-  
+
     if (isRotating) {
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const delta = (clientX - lastX.current) / viewport.width;
-  
+
       ModelRef.current.rotation.y += delta * 0.01 * Math.PI;
       lastX.current = clientX;
       rotationSpeed.current = delta * 0.01 * Math.PI;
     }
-  }
+  },[isRotating,viewport.width]);
 
-  
   useEffect(() => {
     const canvas = gl.domElement;
     canvas.addEventListener("pointerdown", handlePointerDown);
@@ -123,7 +122,6 @@ export function Model({
     canvas.addEventListener("touchstart", handleTouchStart);
     canvas.addEventListener("touchend", handleTouchEnd);
     canvas.addEventListener("touchmove", handleTouchMove);
-
 
     return () => {
       canvas.removeEventListener("pointerdown", handlePointerDown);
@@ -140,8 +138,12 @@ export function Model({
     handlePointerDown,
     handlePointerUp,
     handlePointerMove,
+    handleKeyDown,
+    handleKeyUp,
+    handleTouchStart,
+    handleTouchMove,
+    handleTouchEnd,
   ]);
-
 
   useFrame(() => {
     if (!isRotating) {
@@ -193,8 +195,6 @@ export function Model({
       }
     }
   });
-
-
 
   // const { actions } = useAnimations(animations, group);
   return (

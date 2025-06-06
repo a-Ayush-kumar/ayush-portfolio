@@ -24,10 +24,16 @@ const Home = () => {
     if (isPlayingMusic) {
       audioRef.current.play();
     }
+const currentAudio = audioRef.current;
+ return () => {
+if (currentAudio){
+  currentAudio.pause();
+}
+ }
 
-    return () => {
-      audioRef.current.pause();
-    };
+    // return () => {
+    //   audioRef.current.pause();
+    // };
   }, [isPlayingMusic]);
 
   const adjustModelForScreenSize = () => {
@@ -54,7 +60,7 @@ const Home = () => {
     return [screenScale, screenPosition];
   };
 
-  const [modelScale, modelPosition, modelRotation] = adjustModelForScreenSize();
+  const [modelScale, modelPosition] = adjustModelForScreenSize();
   const [planeScale, planePosition] = adjustPlaneForScreenSize();
   return (
     <section className="w-full h-screen relative">
