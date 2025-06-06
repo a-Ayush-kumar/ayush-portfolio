@@ -292,7 +292,7 @@ export const mechanicalprojects = [
     name: "Assembly and design of CAD - EFT 616",
     description:
       "successfully designed and integrated a payload drop mechanism into the drone, effectively assisting the team in achieving our goal of illustrating this critical feature used by the team UAS-DTU in SUAS 2024. This accomplishment enhanced our project's capabilities and demonstrated practical application in real-world scenarios",
-    link: zipfile,
+    link: "https://drive.google.com/file/d/13RQ6ZppRAXbn5fTzSCcAT8B86lZfomCC/view?usp=sharing",
   },
 ];
 export const resumepage = [
