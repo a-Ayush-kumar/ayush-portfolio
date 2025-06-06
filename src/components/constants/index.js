@@ -1,4 +1,4 @@
-import { uas, zipfile } from "../../assets/images";
+import { uas} from "../../assets/images";
 import {
   bootstrapicon,
   car,
